@@ -4,9 +4,11 @@
     "version": "0.0.1",
     "bugs": "https://github.com/electron-lwc-demo/issues",
     "dependencies": {
+        "@salesforce-ux/design-system": "^2.14.3",
         "compression": "^1.7.4",
         "express": "^4.17.1",
-        "helmet": "^4.4.1"
+        "helmet": "^4.4.1",
+        "lightning-base-components": "^1.11.5-alpha"
     },
     "devDependencies": {
         "eslint": "^7.22.0",
