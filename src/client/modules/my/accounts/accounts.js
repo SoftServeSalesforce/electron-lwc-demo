@@ -1,6 +1,6 @@
 import { LightningElement } from 'lwc';
 const columns = [
-    { label: 'Id', fieldName: 'Id' },
+    { label: 'Custom Type A', fieldName: 'Id', type: 'editRecordCustomType'},
     { label: 'Name', fieldName: 'Name'}
 ];
 export default class Accounts extends LightningElement {
@@ -21,5 +21,16 @@ export default class Accounts extends LightningElement {
     //getter method to check if students array have value
     get isAccountsAvailable(){
         return this.accounts.length > 0;
+    }
+
+    handleRecordEditAction(event) {
+        const { recordId } = event.detail;
+
+        let account = this.accounts.find(function(item, index) {
+            if(item.Id === recordId){
+                return item;
+            }
+        });
+        console.log(account);
     }
 }
