@@ -2,9 +2,21 @@ import { LightningElement } from 'lwc';
 
 export default class App extends LightningElement {
 
+    isAuthorized;
+
+    connectedCallback() {
+        fetch('/isAuthorized').then(res => {
+            res.json().then(data =>{
+                this.isAuthorized = data;
+                console.log(data);
+            });
+        }).catch(err => {
+            console.error(err);
+        });
+    }
+
     handleClick() {
-        let port = 3002;
-        window.location.href = `http://localhost:${port}/oauth2/auth`;
+        window.location.href = `/oauth2/auth`;
     }
 
 }

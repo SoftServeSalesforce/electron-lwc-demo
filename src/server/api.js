@@ -47,10 +47,13 @@ app.get('/oauth2/callback', function(req, res) {
         lcStorage.setItem('accessToken', conn.accessToken ? conn.accessToken : '');
         lcStorage.setItem('refreshToken', conn.refreshToken ? conn.accessToken : '');
         lcStorage.setItem('instanceUrl', conn.instanceUrl ? conn.instanceUrl : '');
-
-        res.redirect(`http://localhost:${PORT}/getAccounts`);
-
+        res.redirect(`http://localhost:3001/`);
     });
+});
+
+app.get('/isAuthorized', (req, res) => {
+    let result = connectionService.getConnection() ? true : false;
+    res.send(result)
 });
 
 app.get('/getAccounts', (req, res) => {

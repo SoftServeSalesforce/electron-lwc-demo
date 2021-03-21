@@ -6,14 +6,21 @@
 
     <!-- Page code -->
     <div class="center">
-        <div>
-            <lightning-button
-                    variant="brand"
-                    label="Login"
-                    title="Login"
-                    onclick={handleClick}
-                    class="slds-m-left_x-small">
-            </lightning-button>
-        </div>
+        <template if:false={isAuthorized}>
+            <div>
+                <lightning-button
+                        variant="brand"
+                        label="Login"
+                        title="Login"
+                        onclick={handleClick}
+                        class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </template>
+        <template if:true={isAuthorized}>
+            <div>
+                <my-accounts></my-accounts>
+            </div>
+        </template>
     </div>
 </template>
