@@ -6,10 +6,13 @@
     "dependencies": {
         "@salesforce-ux/design-system": "^2.14.3",
         "compression": "^1.7.4",
+        "dotenv": "^8.2.0",
         "electron": "^12.0.1",
         "express": "^4.17.1",
         "helmet": "^4.4.1",
-        "lightning-base-components": "^1.11.5-alpha"
+        "jsforce": "^1.10.1",
+        "lightning-base-components": "^1.11.5-alpha",
+        "node-localstorage": "^2.1.6"
     },
     "devDependencies": {
         "eslint": "^7.22.0",
@@ -68,10 +71,9 @@
         "test:unit:coverage": "lwc-services test:unit --coverage",
         "test:unit:debug": "lwc-services test:unit --debug",
         "test:unit:watch": "lwc-services test:unit --watch",
-        "watch": "run-p watch:client watch:server",
+        "watch": "run-p watch:client watch:server start-electron",
         "watch:client": "lwc-services watch",
         "watch:server": "nodemon",
-        "watch": "run-p watch:client watch:server start-electron",
         "start-electron": "electron ."
     }
 }
