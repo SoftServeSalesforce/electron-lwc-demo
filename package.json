@@ -6,6 +6,7 @@
     "dependencies": {
         "@salesforce-ux/design-system": "^2.14.3",
         "compression": "^1.7.4",
+        "electron": "^12.0.1",
         "express": "^4.17.1",
         "helmet": "^4.4.1",
         "lightning-base-components": "^1.11.5-alpha"
@@ -41,6 +42,7 @@
             "eslint"
         ]
     },
+    "main": "src/main.js",
     "nodemonConfig": {
         "watch": [
             "src/server/**/*.js"
@@ -68,6 +70,8 @@
         "test:unit:watch": "lwc-services test:unit --watch",
         "watch": "run-p watch:client watch:server",
         "watch:client": "lwc-services watch",
-        "watch:server": "nodemon"
+        "watch:server": "nodemon",
+        "watch": "run-p watch:client watch:server start-electron",
+        "start-electron": "electron ."
     }
 }
