@@ -1,25 +1,28 @@
 <template>
-    <div class='slds-m-bottom--medium'>
-        <lightning-button
+    <div class='slds-p-around--large'>
+        <div class='slds-m-bottom--medium'>
+            <lightning-button
                 variant="brand"
                 label="Get Accounts"
                 title="Get Accounts"
                 onclick={getAccounts}
                 class="slds-m-left_x-small">
-        </lightning-button>
-    </div>
-    <!-- Check if data is available -->
-    <template if:true={isAccountsAvailable}>
-        <div class='slds-p-around--large'>
-            <my-custom-lightning-datatable
+            </lightning-button>
+        </div>
+        <!-- Check if data is available -->
+        <template if:true={isAccountsAvailable}>
+                <my-custom-lightning-datatable
                     key-field="Id"
                     data={accounts}
                     columns={columns}
                     onopenrecordeditaction={handleRecordEditAction}
                     hide-checkbox-column
-            >
-            </my-custom-lightning-datatable>
-        </div>
-
-    </template>
+                >
+                </my-custom-lightning-datatable>
+        </template>
+        <template if:true={isAccountSelected}>
+            <my-account record='{selectedAccount}' onafterupdate='{handleAccountUpdate}'>
+            </my-account>
+        </template>
+    </div>
 </template>

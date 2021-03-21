@@ -9,6 +9,7 @@ const {CLIENT_ID, CLIENT_SECRET, REDIRECT_URL, LOGIN_URL} = process.env;
 let LocalStorage = require('node-localstorage').LocalStorage;
 let lcStorage = new LocalStorage('./config');
 const app = express();
+const bodyParser = require("body-parser");
 
 var oauth2 = new jsforce.OAuth2({
     loginUrl : LOGIN_URL,
@@ -19,7 +20,8 @@ var oauth2 = new jsforce.OAuth2({
 
 app.use(helmet());
 app.use(compression());
-
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
+app.use(bodyParser.json()); // support json encoded bodies
 const HOST = process.env.API_HOST || 'localhost';
 const PORT = 3002;
 let conn;
@@ -69,5 +71,21 @@ app.get('/getAccounts', (req, res) => {
             }
         });
     }
-
 });
+
+app.post('/updateAccount', (req, res) => {
+    // Single record update
+    let connection = connectionService.getConnection();
+    connection.sobject("Account").update({
+        Id : req.body.recordId,
+        Name : req.body.accountName
+    }, function(err, ret) {
+        if (err || !ret.success) {
+            lcStorage.clear();
+            res.redirect(`http://localhost:3001/`);
+            return res.json({status: 'ERROR', err: err});
+        }
+        return res.json({status: 'SUCCESS'});
+    });
+
+})

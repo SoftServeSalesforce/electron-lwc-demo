@@ -1,20 +1,20 @@
 import { LightningElement } from 'lwc';
+import {getAccounts} from 'my/dataService';
+
 const columns = [
-    { label: 'Custom Type A', fieldName: 'Id', type: 'editRecordCustomType'},
-    { label: 'Name', fieldName: 'Name'}
+    { label: 'Account Id', fieldName: 'Id', type: 'editRecordCustomType'},
+    { label: 'Name', fieldName: 'Name'},
+    { label: 'Account Number', fieldName: 'AccountNumber'}
 ];
 export default class Accounts extends LightningElement {
     accounts = [];
     columns = columns;
+    selectedAccount;
+    isAccountSelected = false;
 
     getAccounts(){
-        //using javascrip native fetch method to get data from server
-        fetch('/getAccounts').then(res => {
-            res.json().then(data =>{
-                this.accounts = data.records;
-            });
-        }).catch(err => {
-            console.error(err);
+        getAccounts().then(data => {
+            this.accounts = data;
         });
     }
 
@@ -31,6 +31,15 @@ export default class Accounts extends LightningElement {
                 return item;
             }
         });
-        console.log(account);
+        if(account !== null) {
+            this.isAccountSelected = true;
+            this.selectedAccount = account;
+        }
+    }
+
+    handleAccountUpdate() {
+        getAccounts().then(data => {
+            this.accounts = data;
+        });
     }
 }
