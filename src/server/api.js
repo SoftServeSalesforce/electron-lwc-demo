@@ -11,7 +11,7 @@ let lcStorage = new LocalStorage('./config');
 const app = express();
 const bodyParser = require("body-parser");
 
-var oauth2 = new jsforce.OAuth2({
+let oauth2 = new jsforce.OAuth2({
     loginUrl : LOGIN_URL,
     clientId : CLIENT_ID,
     clientSecret : CLIENT_SECRET,
